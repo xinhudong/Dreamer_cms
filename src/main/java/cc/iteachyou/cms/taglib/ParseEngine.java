@@ -1,28 +1,11 @@
 package cc.iteachyou.cms.taglib;
 
+import cc.iteachyou.cms.taglib.tags.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cc.iteachyou.cms.common.SearchEntity;
 import cc.iteachyou.cms.exception.CmsException;
-import cc.iteachyou.cms.taglib.tags.ArticleTag;
-import cc.iteachyou.cms.taglib.tags.AttachmentTag;
-import cc.iteachyou.cms.taglib.tags.CategoryTag;
-import cc.iteachyou.cms.taglib.tags.ChannelArtListTag;
-import cc.iteachyou.cms.taglib.tags.ChannelTag;
-import cc.iteachyou.cms.taglib.tags.GlobalTag;
-import cc.iteachyou.cms.taglib.tags.IfTag;
-import cc.iteachyou.cms.taglib.tags.IncludeTag;
-import cc.iteachyou.cms.taglib.tags.LabelTag;
-import cc.iteachyou.cms.taglib.tags.ListTag;
-import cc.iteachyou.cms.taglib.tags.LocationTag;
-import cc.iteachyou.cms.taglib.tags.PageListTag;
-import cc.iteachyou.cms.taglib.tags.PrevNextTag;
-import cc.iteachyou.cms.taglib.tags.SqlTag;
-import cc.iteachyou.cms.taglib.tags.TemplateTag;
-import cc.iteachyou.cms.taglib.tags.TopCategoryTag;
-import cc.iteachyou.cms.taglib.tags.TypeTag;
-import cc.iteachyou.cms.taglib.tags.VariableTag;
 
 @Component
 public class ParseEngine {
@@ -61,6 +44,8 @@ public class ParseEngine {
 	@Autowired
 	private AttachmentTag attachmentTag;
 	@Autowired
+	private TreeTag treeTag;
+	@Autowired
 	private SqlTag sqlTag;
 	
 	/**
@@ -82,7 +67,10 @@ public class ParseEngine {
 		newHtml = channelTag.parse(newHtml);
 		listTag.setT("P");
 		newHtml = listTag.parse(newHtml);
+		locationTag.setT("P");
 		newHtml = locationTag.parse(newHtml);
+		treeTag.setT("P");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = ifTag.parse(newHtml);
@@ -105,6 +93,9 @@ public class ParseEngine {
 		// 当前位置
 		locationTag.setT("P");
 		newHtml = locationTag.parse(newHtml, typeid);
+		// 栏目树
+		treeTag.setT("P");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);
@@ -123,6 +114,9 @@ public class ParseEngine {
 		String newHtml = new String(html);
 		pageListTag.setT("P");
 		newHtml = pageListTag.parse(newHtml, typeid, pageNum, pageSize);
+		// 栏目树
+		treeTag.setT("P");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);
@@ -140,6 +134,9 @@ public class ParseEngine {
 		newHtml = articleTag.parse(newHtml, id);
 		locationTag.setT("P");
 		newHtml = locationTag.parse(newHtml, id);
+		// 栏目树
+		treeTag.setT("P");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);
@@ -162,6 +159,9 @@ public class ParseEngine {
 		String newHtml = new String(html);
 		pageListTag.setT("P");
 		newHtml = pageListTag.parse(newHtml, params);
+		// 栏目树
+		treeTag.setT("P");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);
@@ -182,6 +182,9 @@ public class ParseEngine {
 		newHtml = channelTag.parse(newHtml);
 		listTag.setT("S");
 		newHtml = listTag.parse(newHtml);
+		// 栏目树
+		treeTag.setT("S");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = ifTag.parse(newHtml);
@@ -204,6 +207,9 @@ public class ParseEngine {
 		// 当前位置
 		locationTag.setT("S");
 		newHtml = locationTag.parse(newHtml, typeid);
+		// 栏目树
+		treeTag.setT("S");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);
@@ -214,6 +220,9 @@ public class ParseEngine {
 		String newHtml = new String(html);
 		pageListTag.setT("S");
 		newHtml = pageListTag.parse(newHtml,typeid, pageNum,pageSize);
+		// 栏目树
+		treeTag.setT("S");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);
@@ -230,8 +239,11 @@ public class ParseEngine {
 		String newHtml = new String(html);
 		articleTag.setT("S");
 		newHtml = articleTag.parse(newHtml, id);
-		locationTag.setT("P");
+		locationTag.setT("S");
 		newHtml = locationTag.parse(newHtml, id);
+		// 栏目树
+		treeTag.setT("S");
+		newHtml = treeTag.parse(newHtml);
 		newHtml = labelTag.parse(newHtml);
 		newHtml = attachmentTag.parse(newHtml);
 		newHtml = sqlTag.parse(newHtml);

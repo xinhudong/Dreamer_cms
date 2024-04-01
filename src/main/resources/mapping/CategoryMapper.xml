@@ -36,14 +36,14 @@
     <result column="md_content" property="mdContent" jdbcType="LONGVARCHAR" />
     <result column="html_content" property="htmlContent" jdbcType="LONGVARCHAR" />
   </resultMap>
-  
+
   <sql id="Base_Column_List" >
-    id, cnname, enname, code, cat_seq, form_id, image_path, description, link_target, 
-    page_size, cat_model, visit_url, cover_temp, list_temp, article_temp, link_url, default_editor, 
-    parent_id, is_show, level, sort, is_input, create_by, create_time, update_by, update_time, 
+    id, cnname, enname, code, cat_seq, form_id, image_path, description, link_target,
+    page_size, cat_model, visit_url, cover_temp, list_temp, article_temp, link_url, default_editor,
+    parent_id, is_show, level, sort, is_input, create_by, create_time, update_by, update_time,
     ext01, ext02, ext03, ext04, ext05, md_content, html_content
   </sql>
-  
+
   <select id="queryListByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
   	select 
   	<include refid="Base_Column_List" />
