@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cc.iteachyou.cms.common.ExceptionEnum;
+import cc.iteachyou.cms.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -72,6 +74,12 @@ public class CategoryTag implements IParse {
 			}
 			
 			Category temp = categoryService.queryCategoryByCode(typeid);
+			if(temp == null){
+				throw new CategoryNotFoundException(
+						ExceptionEnum.CAT_NOTFOUND_EXCEPTION.getCode(),
+						ExceptionEnum.CAT_NOTFOUND_EXCEPTION.getMessage(),
+						"栏目不存在，请检查标签中是否调用了不存在的（typeid）。");
+			}
 			
 			String imagePath = "";
 			if(StringUtil.isNotBlank(temp.getImagePath())) {
