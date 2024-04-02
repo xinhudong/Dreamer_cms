@@ -47,4 +47,15 @@ layout|要展示上一篇、下一篇的布局，可选项[prev/next/prev,next]
 ```
 
 #### 效果
-无
+会返回上一篇、下一篇html片段，样式可自行控制，如
+```html?linenums
+<ul class='dreamer-prevnext'>
+    <li class='dreamer-prev'>
+        <span class='dreamer-prevnext-label'>上一篇：</span>
+        <a href='/article/7a4bc5cade9845bbb2528783d995ce20' title='智慧校园管理系统平台组成内容有哪些'>智慧校园管理系统平台组成内容有哪些</a>
+    </li>
+    <li class='dreamer-next'>
+        <span class='dreamer-prevnext-label'>下一篇：没有了</span>
+    </li>
+</ul>
+```
