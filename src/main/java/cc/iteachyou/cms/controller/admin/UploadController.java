@@ -83,7 +83,7 @@ public class UploadController extends BaseController{
 	
 	@PostMapping("uploadMarkDown")
 	@ResponseBody
-	public void editormdPic(@RequestParam(value = "editormd-image-file", required = true) MultipartFile file, HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public void uploadMarkDown(@RequestParam(value = "editormd-image-file", required = true) MultipartFile file, HttpServletRequest request,HttpServletResponse response) throws Exception{
 		JSONObject result = new JSONObject();
 		try {
 			if(file.isEmpty()) {
