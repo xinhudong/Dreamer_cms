@@ -35,7 +35,6 @@ public class DatabaseServiceImpl implements DatabaseService {
 	public int backup(String tableName) {
 		BackupThread backupThread = new BackupThread();
 		backupThread.setFileConfiguration(fileConfiguration);
-		backupThread.setSystemMapper(systemMapper);
 		backupThread.setDatabaseMapper(databaseMapper);
 		backupThread.setTableNames(new String[] {tableName});
 		Thread t = new Thread(backupThread);
@@ -60,6 +59,5 @@ public class DatabaseServiceImpl implements DatabaseService {
 		t.start();
 		return 1;
 	}
-	
-	
+
 }

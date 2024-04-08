@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 public class BackupThread implements Runnable {
 	private String LINE_CHARACTER = "\r\n";
 	private FileConfiguration fileConfiguration;
-	private SystemMapper systemMapper;
 	private DatabaseMapper databaseMapper;
 	private String[] tableNames;
 
@@ -30,16 +29,16 @@ public class BackupThread implements Runnable {
 	public void run() {
 		log.info("准备备份数据库...");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
+		// 只停留30天数据，将之前的数据循环删除
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -3);
+		calendar.add(Calendar.DATE, -30);
 		String expiredFilePath = fileConfiguration.getResourceDir() + "backups/" + sdf.format(calendar.getTime());
 		File expiredFile = new File(expiredFilePath);
 		if(expiredFile.exists()) {
 			expiredFile.delete();
 		}
-		
-		
+
 		for (int i = 0; i < tableNames.length; i++) {
 			String tableName = tableNames[i];
 			log.info("准备备份数据表["+ tableName +"]...");
