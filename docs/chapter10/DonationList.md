@@ -201,8 +201,8 @@
 		<td>2024-03-04 19:09:25</td>
 	</tr>
     <tr>
-		<td money="200.00" class="18871499345" web="">熊波</td>
-		<td>个人</td>
+		<td money="200.00" class="18871499345" web="http://www.yexingkeji.com">武汉烨兴科技集团有限公司</td>
+		<td>企业</td>
 		<td>永久</td>
 		<td>2024-03-15 13:18:49</td>
 	</tr>
