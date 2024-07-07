@@ -27,7 +27,7 @@
 - 管理员：wangjn
 - 管理员密码：123456
 3. I Teach You,我教你! 官网：https://www.iteachyou.cc
-4. 模版标签开发教程请参考：http://doc.iteachyou.cc 或 https://iteachyou.gitee.io/dreamer_cms/
+4. 模版标签开发教程请参考：http://doc.iteachyou.cc 或 https://iteachyou-wjn.github.io/dreamer_cms/
 
 QQ交流群：
 - ①597652651（未满）

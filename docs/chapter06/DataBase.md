@@ -263,7 +263,7 @@
 | update_by    | varchar(32)  |    |                     | 修改人           |
 | update_time  | timestamp    |    | CURRENT_TIMESTAMP   | 修改时间          |
 
-### 16. system_theme（网站主题表）
+### 16. system_variable（网站变量表）
 
 | 字段名         | 类型            | 键  | 默认值                 | 字段说明 |
 |-------------|---------------|----|---------------------|------|
