@@ -155,7 +155,7 @@
 				<div th:id="'uploader-'+${field.id}" class="wu-example" th:if="${field.dataType} == 'image'">
 				    <!--用来存放文件信息-->
 				    <div th:id="'file-priview-'+${field.id}" class="file-priview">
-				    	<img th:src="${system.website} + 'resources/' + ${system.uploaddir} + ${article[field.fieldName]}" th:if="${article[field.fieldName]} != null and ${article[field.fieldName]} != ''" />
+				    	<img th:src="${system.website} + 'resources/' + ${system.uploaddir} + '/' + ${article[field.fieldName]}" th:if="${article[field.fieldName]} != null and ${article[field.fieldName]} != ''" />
 				    </div>
 				    <div class="btns">
 				        <div th:id="'picker-'+${field.id}">选择文件...</div>
