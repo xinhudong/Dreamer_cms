@@ -33,7 +33,6 @@
 		<commonsio.version>2.11.0</commonsio.version>
 		<commonscodec.version>1.15</commonscodec.version>
 		<commonsfileupload.version>1.4</commonsfileupload.version>
-		<orgjson.version>20180130</orgjson.version>
 		<easycaptcha.version>1.6.2</easycaptcha.version>
 	</properties>
 
@@ -162,12 +161,6 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commonsfileupload.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>${orgjson.version}</version>
 		</dependency>
 
 		<!-- Lombok支持 -->

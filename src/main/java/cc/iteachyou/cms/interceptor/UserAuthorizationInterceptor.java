@@ -38,7 +38,13 @@ public class UserAuthorizationInterceptor implements HandlerInterceptor{
 		System system = systemService.getSystem();
 
 		String referer = request.getHeader("referer");
-		if(StrUtil.isNotBlank(referer)) {
+		String origin = request.getHeader("origin");
+
+		if(StrUtil.isBlank(referer) && StrUtil.isBlank(origin)){
+			throw new UnauthorizedException("访问来源不合法");
+		}
+
+		if(StrUtil.isNotBlank(referer)){
 			if (!referer.startsWith(system.getWebsite())) {
 				throw new UnauthorizedException("访问来源不合法");
 			}
@@ -56,8 +62,13 @@ public class UserAuthorizationInterceptor implements HandlerInterceptor{
 					}
 				}
 			}
-		}else{
-			throw new UnauthorizedException("访问来源不合法");
+		}
+
+		if(StrUtil.isNotBlank(origin)) {
+			origin = origin.endsWith("/") ? origin : origin + "/";
+			if(!origin.startsWith(system.getWebsite())) {
+				throw new UnauthorizedException("访问来源不合法");
+			}
 		}
 		log.info("UserAuthorizationInterceptor：["+token+"]拦截通过...");
 		return Boolean.TRUE;

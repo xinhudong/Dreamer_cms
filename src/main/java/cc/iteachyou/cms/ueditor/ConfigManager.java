@@ -10,10 +10,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import cc.iteachyou.cms.ueditor.define.ActionMap;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 配置管理器
@@ -122,13 +121,13 @@ public final class ConfigManager {
 			case ActionMap.LIST_IMAGE:
 				conf.put( "allowFiles", this.getArray( "imageManagerAllowFiles" ) );
 				conf.put( "dir", this.jsonConfig.getString( "imageManagerListPath" ) );
-				conf.put( "count", this.jsonConfig.getInt( "imageManagerListSize" ) );
+				conf.put( "count", this.jsonConfig.getInteger( "imageManagerListSize" ) );
 				break;
 				
 			case ActionMap.LIST_FILE:
 				conf.put( "allowFiles", this.getArray( "fileManagerAllowFiles" ) );
 				conf.put( "dir", this.jsonConfig.getString( "fileManagerListPath" ) );
-				conf.put( "count", this.jsonConfig.getInt( "fileManagerListSize" ) );
+				conf.put( "count", this.jsonConfig.getInteger( "fileManagerListSize" ) );
 				break;
 				
 		}
@@ -148,7 +147,7 @@ public final class ConfigManager {
 		String configContent = this.readFile( this.getConfigPath() );
 		
 		try{
-			JSONObject jsonConfig = new JSONObject( configContent );
+			JSONObject jsonConfig = JSONObject.parseObject(configContent);
 			this.jsonConfig = jsonConfig;
 		} catch ( Exception e ) {
 			this.jsonConfig = null;
@@ -161,9 +160,9 @@ public final class ConfigManager {
 
 	private String[] getArray ( String key ) {
 		JSONArray jsonArray = this.jsonConfig.getJSONArray( key );
-		String[] result = new String[ jsonArray.length() ];
+		String[] result = new String[ jsonArray.size() ];
 		
-		for ( int i = 0, len = jsonArray.length(); i < len; i++ ) {
+		for ( int i = 0, len = jsonArray.size(); i < len; i++ ) {
 			result[i] = jsonArray.getString( i );
 		}
 		return result;
