@@ -73,12 +73,15 @@
                 </label>
 			</div>
 			<div class="form-group form-control-medium">
-				<label for="imagePath">缩略图：</label>
+				<label for="uploader">缩略图：</label>
 				<div id="uploader" class="wu-example">
 				    <!--用来存放文件信息-->
 				    <div id="file-priview" class="file-priview"></div>
 				    <div class="btns">
 				        <div id="picker">选择文件...</div>
+						<div class="webuploader-container">
+							<div class="webuploader-pick btn btn-default m-lr-10" style="padding: 5px 12px;" onclick="cancelPriviewImage();">清除</div>
+						</div>
 				    </div>
 				</div>
 			</div>
@@ -87,7 +90,7 @@
 				<input id="categoryId" type="text" class="form-control" th:value="${category.cnname}" readonly="readonly">
 			</div>
 			<div class="form-group form-control-medium">
-				<label for="tag">标签：</label>
+				<label for="myULTags">标签：</label>
 				<ul id="myULTags"></ul>
 			</div>
 			<div class="form-group">
@@ -187,8 +190,9 @@
                 </div>
                 <div style="clear:both;"></div>
 			</div>
-			<div class="form-btn-group-left" shiro:hasAnyPermissions="system:article:toadd,system:article:add">
-            	<button type="submit" class="btn btn-info">保存</button>
+			<div class="form-btn-group-left">
+            	<button type="submit" class="btn btn-info" shiro:hasAnyPermissions="system:article:toadd,system:article:add">保存</button>
+				<button type="button" class="btn btn-default" onclick="javascript:history.go(-1);">取消</button>
             </div>
 		</form>
 	</div>
@@ -348,7 +352,7 @@
 	    });
     }
     
-  //上传文件
+  	//上传文件
 	function uploadFile(){
 	    var fileNumbers = imagesetUploader.getFiles().length;
 	    if (fileNumbers > 0) {
@@ -374,6 +378,12 @@
 			$("#input-" + fieldId).val(files.toString());
 		}
 		$("#" + id).remove();
+	}
+
+	//取消已上传的缩略图
+	function cancelPriviewImage(){
+		$("#file-priview").children().remove();
+		$("#filepath").val("");
 	}
     
     function initMdEditor(id,el){

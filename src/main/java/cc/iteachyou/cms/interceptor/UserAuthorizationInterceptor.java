@@ -70,7 +70,7 @@ public class UserAuthorizationInterceptor implements HandlerInterceptor{
 				throw new UnauthorizedException("访问来源不合法");
 			}
 		}
-		log.info("UserAuthorizationInterceptor：["+token+"]拦截通过...");
+		//log.info("UserAuthorizationInterceptor：["+token+"]拦截通过...");
 		return Boolean.TRUE;
 	}
 	
