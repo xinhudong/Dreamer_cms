@@ -10,6 +10,9 @@
     <link href="/resource/css/iCheck/all.css" rel="stylesheet" type="text/css" />
     <link href="/resource/css/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/resource/js/webuploader-0.1.5/webuploader.css" />
+	<style type="text/css">
+		.btns{display:flex;}
+	</style>
 </head>
 
 <body>
@@ -58,19 +61,22 @@
 						<input id="enname" name="enname" type="text" class="form-control" placeholder="栏目英文名称" />
 					</div>
 					<div class="form-group form-control-small">
-						<label for="arcdir">表单模型：</label>
+						<label for="formId">表单模型：</label>
 						<select class="form-control m-b-10" name="formId" id="formId">
 							<option>请选择表单模型</option>
                             <option th:each="form : ${forms}" th:text="${form.formName}+' | '+${form.code}" th:value="${form.id}" th:selected="${category.formId eq form.id}"></option>
                         </select>
 					</div>
 					<div class="form-group form-control-medium">
-						<label for="imagePath">栏目图片：</label>
+						<label for="uploader">栏目图片：</label>
 						<div id="uploader" class="wu-example">
 						    <!--用来存放文件信息-->
 						    <div id="file-priview" class="file-priview"></div>
 						    <div class="btns">
 						        <div id="picker">选择文件...</div>
+								<div class="webuploader-container">
+									<div class="webuploader-pick btn btn-default m-lr-10" style="padding: 5px 12px;" onclick="cancelPriviewImage();">清除</div>
+								</div>
 						    </div>
 						</div>
 					</div>
@@ -235,6 +241,12 @@
 			cocoMessage.error("上传失败");
 	    });
     }
+
+	//取消已上传的缩略图
+	function cancelPriviewImage(){
+		$("#file-priview").children().remove();
+		$("#filepath").val("");
+	}
     
     function validateForm(){
 		var formId = $("#formId").val();
