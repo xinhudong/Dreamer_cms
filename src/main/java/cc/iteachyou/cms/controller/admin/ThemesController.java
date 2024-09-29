@@ -6,7 +6,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import cn.hutool.core.io.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,8 +109,10 @@ public class ThemesController extends BaseController {
 		String themeImage = jsonObject.getString("themeImage");
 		String themeAuthor = jsonObject.getString("themeAuthor");
 		String themePath1 = jsonObject.getString("themePath");
-		
-		if(themePath1.contains("../") || themePath1.contains("..\\")) {
+
+		Pattern pattern = Pattern.compile("[^a-zA-Z0-9_]");
+		Matcher matcher = pattern.matcher(themePath1);
+		if(themePath1.contains("../") || themePath1.contains("..\\") || matcher.find()) {
 			throw new XssAndSqlException(
 					ExceptionEnum.XSS_SQL_EXCEPTION.getCode(),
 					ExceptionEnum.XSS_SQL_EXCEPTION.getMessage(),

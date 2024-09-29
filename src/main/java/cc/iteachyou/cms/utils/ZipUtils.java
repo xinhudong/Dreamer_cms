@@ -7,13 +7,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import cc.iteachyou.cms.common.ExceptionEnum;
 import cc.iteachyou.cms.entity.Theme;
 import cc.iteachyou.cms.exception.AdminGeneralException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ZipUtils {
 	/**
 	 * 解压文件到指定目录
@@ -31,9 +35,11 @@ public class ZipUtils {
 		for (Enumeration entries = zip.entries(); entries.hasMoreElements();) {
 			ZipEntry entry = (ZipEntry) entries.nextElement();
 			String entryName = entry.getName();
-			System.out.println(entryName);
-			
-		    if(entryName.contains("../") || entryName.contains("..\\")) {
+
+			Pattern pattern = Pattern.compile("[^a-zA-Z0-9_]");
+			Matcher matcher = pattern.matcher(entryName);
+		    if(entryName.contains("../") || entryName.contains("..\\") || matcher.find()) {
+				log.error("压缩包中文件名疑似不安全，详情：{}", entryName);
 				throw new AdminGeneralException(
 						ExceptionEnum.XSS_SQL_EXCEPTION.getCode(),
 						ExceptionEnum.XSS_SQL_EXCEPTION.getMessage(),
@@ -65,7 +71,7 @@ public class ZipUtils {
 			out.close();
 		}
 		zip.close();
-		System.out.println("******************解压完毕******************");
+		log.info("******************解压完毕******************");
 		return theme;
 	}
 }
